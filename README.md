@@ -8,7 +8,7 @@ Requirements:
 
 Steps :
 
-Step 1: Download the docker-compose.yml file and go to the directory where it is stored.
+Step 1: Download the docker-compose.yml file (https://github.com/Yashas07/Railway-Ticket-Reservation/blob/master/docker-compose.yml) and go to the directory where it is stored.
 
 Step 2: Start the app by the command  (sudo docker-compose up -d).
 
