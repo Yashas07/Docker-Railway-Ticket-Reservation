@@ -16,6 +16,6 @@ Step 3: Go to the directory where you have created the docker-compose.yml file.
 
 Step 4: Start the app by the command  (sudo docker-compose up -d).
 
-Step 5: Access the port 3500 i.e Enter localhost:3500 in the browser.
+Step 5: Access the port 3500 (Enter localhost:3500 in the browser).
 
 
