@@ -1,0 +1,143 @@
+<%- include('../includes/nav.ejs') -%>
+<br>
+<br>
+<br>
+<br>
+<div class="container " style="text-align:center; margin-left:350px">
+    <form action="/pnrStatus" method="POST">
+        <div class="form-group ">
+            <div class=" col-md-6" style="text-align:center;">
+              <% if (set1==true && set==false) { %>
+                <div class="display-border fade-away" style="background-color:red; color:white;">
+                  <h4>Not a Valid PNR Number !!</h4>
+                </div>
+              <% } %>
+            <label for="pnr"><h3><strong>Enter your PNR Number</strong></h3></label>
+            <input class="form-control " type="text" name="pnr" id="pnr" value="<% if(set1) { %><%= pnr %><% } %>">
+            </div>
+            <br>
+            <div class="col-md-6 text-center">
+        <button type="submit" class="btn btn-primary btn-lg">Check Status</button>
+        </div>
+        </div>
+    </form>
+</div>
+<br>
+
+<br class="loading-down">
+    <% if (set) { %>
+        <div class="container display-border">
+            <div class="form-group">
+                <h1 class="text-center">INDIAN RAILWAYS</h1>
+                <div class="from-group row">
+                    <div class="col-md-9">
+                <h3>Date : <%= arr[0].Date %></h3>
+                </div>
+                <h3>Time : <%= arr[0].time %></h3>
+                </div>
+                
+      
+      <h3 class="text-center">PNR Number: <%= arr[0].pnr %></h3>
+      <br>
+      <h2>Train Details</h2>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Train Number</th>
+            <th scope="col">Train Name</th>
+            
+            <th scope="col">Departure</th>
+            <th scope="col">Arrival</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><%= arr[0].train_id %></th>
+            <th><%= arr[0].train_name %> </th>
+            
+            <th><%= arr[0].journey_date %>,<%= arr[0].departure_time %> hrs</th>
+            <th><%= arr[0].arrival_date %>,<%= arr[0].arrival_time %> hrs</th>
+          </tr>
+          
+        </tbody>
+      </table>
+      <br>
+      <h2>Ticket Details</h2>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            
+            <th scope="col">Boarding Station</th>
+            <th scope="col">Deboarding Station</th>
+            <th scope="col">Distance</th>
+            <th scope="col">Date Of Journey</th>
+            <th scope="col">Class</th>
+            <th scope="col">Duration (hrs)</th>
+            <th scope="col">Fare</th>
+            <th scope="col">No. of seats</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><%= arr[0].source %></th>
+            <th><%= arr[0].destination %></th>
+            <th><%= arr[0].distance %> km</th>
+            <th><%= arr[0].journey_date %></th>
+            <th><%= arr[0].class %></th>
+            <th><%= arr[0].duration %></th>
+            <th>Rs.<%= arr[0].price %></th>
+            <th><%= arr[0].no_of_seats %></th>
+          </tr>
+          
+        </tbody>
+      </table>
+    <br>
+    <h2>Passenger Details</h2>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+            <th scope="col"></th> 
+          <th scope="col">Name</th>
+          <th scope="col">Age</th>
+          <th scope="col">Gender</th>
+          <th scope="col">Ticket-Status</th>
+          
+          <th scope="col">Seat-Number</th>
+          <th scope="col">Coach-Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(let i = 0;i<arr.length;i++) { %>
+        <tr>
+          <th><%=i+1%></th>
+          <th><%= arr[i].name %></th>
+          <th><%= arr[i].age %></th>
+          <th><%= arr[i].gender %></th>
+          
+          <th><%= arr[i].ticket_status %></th>
+          <% if (arr[i].ticket_status.toString().slice(0,3)=='CNF') { %>
+          <th><%= arr[i].status_num %></th>
+          <th><%= arr[i].coach_no %></th>
+          <% } else { %>
+            <th>----</th>
+            <th>----</th>
+        <% } %>
+        <% } %>
+        </tr>
+      </tbody>
+    </table>
+    
+
+        
+        <br>
+    </div>
+    </div>
+    <% } %>
+    <script >
+      const fade_away = setTimeout(() => {
+        document.querySelector('.fade-away').remove();
+      },3000);
+      
+      fade_away();
+    </script>
+<%- include('../includes/end.ejs') -%>

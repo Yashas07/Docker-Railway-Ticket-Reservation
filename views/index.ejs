@@ -1,0 +1,159 @@
+<%- include('./includes/nav.ejs') -%>
+<link rel="stylesheet" href="/css/starting_backgroundimage.css">
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <h1 class="railways-name"><strong>INDIAN RAILWAYS</strong></h1>
+    </div>
+    <div class="container display-border-2">
+        <div class="form-group">
+        <form action="/trains" class="needs-validation" method="POST" novalidate >
+           
+                
+                <br>
+                <div class="form-group col-md-12 decorate">
+                    <h3 ><strong>BOOK YOUR TICKET</strong></h3>
+                </div>
+                <div class="form-group col-sm-12 swap-parent-3">
+                    <img class="swap-3" src="/img/new.png" alt="train">
+                </div>
+                <br>
+                <div class="form-group col-md-12">
+                    <!-- <label for="source">From : </label> -->
+                    <!-- <input class="form-control" type="text" name="source" id="source"  placeholder="From"   required <% if (set) { %>value="<%= input_data.source %>"<% } else { %>value=""<% } %> > -->
+                    <select class="custom-select"  name="source" id="source"  required >
+                        <% if(!set) { %>  <option selected disabled value="">Select source ...</option><% } %>
+                        <option value="Bengaluru" <% if (set) { if ( input_data.source =='Bengaluru') { %>selected<% }} %>>Bengaluru</option>
+                        <option value="Yeshwanthpur" <% if (set) { if ( input_data.source =='Yeshwanthpur') { %>selected<% }} %>>Yeshwanthpur</option>
+                        <option value="Puducherry" <% if (set) { if ( input_data.source =='Puducherry') { %>selected<% }} %>>Puducherry</option>
+                        <option value="Howrah" <% if (set) { if ( input_data.source =='Howrah') { %>selected<% }} %>>Howrah</option>
+                        <option value="Tumkur" <% if (set) { if ( input_data.source =='Tumkur') { %>selected<% }} %>>Tumkur</option>
+                        <option value="Vijayawada JN" <% if (set) { if ( input_data.source =='Vijayawada JN') { %>selected<% }} %>>Vijayawada JN</option>
+                        <option value="Tiptur" <% if (set) { if ( input_data.source =='Tiptur') { %>selected<% }} %>>Tiptur</option>
+                        <option value="Talguppa" <% if (set) { if ( input_data.source =='Talguppa') { %>selected<% }} %>>Talguppa</option>
+                        <option value="Bhubaneshwar" <% if (set) { if ( input_data.source =='Bhubaneshwar') { %>selected<% }} %>>Bhubaneshwar</option>
+                        <option value="Hazrat Nizamuddin" <% if (set) { if ( input_data.source =='Hazrat Nizamuddin') { %>selected<% }} %>>Hazrat Nizamuddin</option>
+                        <option value="Hubballi JN" <% if (set) { if ( input_data.source =='Hubballi JN') { %>selected<% }} %>>Hubballi JN</option>
+                        <option value="Davangere" <% if (set) { if ( input_data.source =='Davangere') { %>selected<% }} %>>Davangere</option>
+                    
+                    </select>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please provide the valid source
+                    </div>  
+                </div>
+                <div class="form-group col-sm-12 swap-parent-2">
+                    <!-- <h6 class="cant-see">.</h6> -->
+                    <img class="swap-2" src="/img/two.png" alt="swap">
+                   
+                </div>
+                <div class="form-group col-md-12">
+                <!-- <label for="destination">To : </label> -->
+                <!-- <input class="form-control " type="text" name="destination" id="destination" placeholder="To" required  <% if (set) { %>value="<%= input_data.destination %>"<% } else { %>value=""<% } %>> -->
+                <select class="custom-select"  name="destination" id="destination"  required >
+                    <% if(!set) { %><option selected disabled value="">Select destination ...</option><% } %>
+                    <option value="Bengaluru" <% if (set) { if ( input_data.destination =='Bengaluru') { %>selected<% }} %>>Bengaluru</option>
+                    <option value="Yeshwanthpur" <% if (set) { if ( input_data.destination =='Yeshwanthpur') { %>selected<% }} %>>Yeshwanthpur</option>
+                    <option value="Puducherry" <% if (set) { if ( input_data.destination =='Puducherry') { %>selected<% }} %>>Puducherry</option>
+                    <option value="Howrah" <% if (set) { if ( input_data.destination =='Howrah') { %>selected<% }} %>>Howrah</option>
+                    <option value="Tumkur" <% if (set) { if ( input_data.destination =='Tumkur') { %>selected<% }} %>>Tumkur</option>
+                    <option value="Vijayawada JN" <% if (set) { if ( input_data.destination =='Vijayawada JN') { %>selected<% }} %>>Vijayawada JN</option>
+                    <option value="Tiptur" <% if (set) { if ( input_data.destination =='Tiptur') { %>selected<% }} %>>Tiptur</option>
+                    <option value="Talguppa" <% if (set) { if ( input_data.destination =='Talguppa') { %>selected<% }} %>>Talguppa</option>
+                    <option value="Bhubaneshwar" <% if (set) { if ( input_data.destination =='Bhubaneshwar') { %>selected<% }} %>>Bhubaneshwar</option>
+                    <option value="Hazrat Nizamuddin" <% if (set) { if ( input_data.destination =='Hazrat Nizamuddin') { %>selected<% }} %>>Hazrat Nizamuddin</option>
+                    <option value="Hubballi JN" <% if (set) { if ( input_data.destination =='Hubballi JN') { %>selected<% }} %>>Hubballi JN</option>
+                    <option value="Davangere" <% if (set) { if ( input_data.destination =='Davangere') { %>selected<% }} %>>Davangere</option>
+                </select>
+                <div class="valid-feedback">
+                    Looks good!
+                </div> 
+                <div class="invalid-feedback">
+                    Please provide the valid destination
+                </div>     
+                </div>
+                
+                <div class="col-md-12">
+                    <!-- <label for="date">Date : </label> -->
+                    <!-- <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                    
+                    </i>
+                    </div>
+                    </div> -->
+                    <input class="form-control " id="date-picker" type="text" name="date" id="date" placeholder="dd-mm-yyyy" required autocomplete="off" <% if (set) { %>value="<%= input_data.dates %>"<% } %> >
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        add the date
+                    </div>
+                </div>
+                <br>
+               
+                <div class="col-md-12">
+                    <!-- <label for="class">Class </label> -->
+                    <select  class="custom-select" name="train_class" id="class" required>
+                        <% if(!set) { %><option selected disabled value="">Class...</option><% } %>
+                        <option value="All-Class">All-Class </option>
+                        <option value="1A" <% if (set) { if ( input_data.train_class =='1A') { %>selected<% }} %>>AC First Class (1A)</option>
+                        <option value="EC" <% if (set) { if ( input_data.train_class =='EC') { %>selected<% }} %>>Exec. Chair Car (EC)</option>
+                        <option value="2A" <% if (set) { if ( input_data.train_class =='2A') { %>selected<% }} %>>AC 2 Tier (2A)</option>
+                        <option value="3A" <% if (set) { if ( input_data.train_class =='3A') { %>selected<% }} %>>AC 3 Tier (3A)</option>
+                        <option value="3E" <% if (set) { if ( input_data.train_class =='3E') { %>selected<% }} %>>AC 3 Economy (3E)</option>
+                        <option value="CC" <% if (set) { if ( input_data.train_class =='CC') { %>selected<% }} %>>AC Chair Car (CC)</option>
+                        <option value="SL" <% if (set) { if ( input_data.train_class =='SL') { %>selected<% }} %>>Sleeper (SL)</option>
+                        <option value="2S" <% if (set) { if ( input_data.train_class =='3E') { %>selected<% }} %>>Second Sitting (2S)</option>
+                    </select>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        select class
+                    </div>
+                </div>
+               
+            
+            <br>
+            <div class="col-md-12">
+            <button class="btn btn-success btn-lg btn-block loader" type="submit"> Search </button>
+            </div>
+        
+        </form>
+    </div>
+    </div>
+
+    <!-- <br class="loading-down"> -->
+
+    <!-- <div class="container">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/V5DV6uHQO7U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div> -->
+    
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+          'use strict';
+          window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+              form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+              }, false);
+            });
+          }, false);
+        })();
+        </script>
+<script src="/js/nav.js"></script>
+<%- include('./includes/end.ejs') -%>
+    

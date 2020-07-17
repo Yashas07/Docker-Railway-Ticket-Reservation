@@ -1,0 +1,28 @@
+version: "3"
+services: 
+    railwaydata:
+        image: yashasgc/railwaydata
+        volumes: 
+            - railway_data:/var/lib/mysql
+        networks: 
+            - railwaynet
+
+    nodeapp:
+        image: yashasgc/nodeapp
+        ports: 
+            - "3500:4000"
+        networks: 
+            - railwaynet
+        environment: 
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=password
+            - MYSQL_DATABASE=trainreservation
+            - MYSQL_HOST=railwaydata
+            - PORT=4000
+        
+
+networks: 
+    railwaynet:
+
+volumes: 
+    railway_data:

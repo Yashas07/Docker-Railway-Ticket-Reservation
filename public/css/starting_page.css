@@ -1,0 +1,166 @@
+/* body {
+    background :  url('../img/konkanrailways.jpg')  ;
+    background-repeat : no-repeat;
+    background-size: cover; 
+     background-position: fixed  ;
+   
+    
+} */
+/* body {
+    background-color:black;
+} */
+/* .container {
+    font-size: 1.5rem;
+    font-weight: bold;   
+    border: 7px solid green;
+    border-radius : 10px;
+    box-shadow : 2px 4px  rgb(226, 223, 223);
+} */
+ul {
+    list-style : none;
+    padding : 0;
+    margin : 0;
+}
+.display-border {
+    border : 1px solid black;
+    margin-bottom : 1%;
+    border-radius : 10px;
+    background-color : white;
+    
+}
+
+.display-border-2 {
+    border : 1px solid black;
+    margin-bottom : 1%;
+    border-radius : 10px;
+    background-color : white;
+    width : 25%;
+    margin-left : 9%;
+}
+.image-edit {
+    position : fixed;
+    top : 10%;
+    left : 40%; 
+    
+}
+
+.color-picker {
+    color : green;
+    margin-bottom : 1%;
+    font-size:1rem;
+}
+
+.cant-see {
+    visibility : hidden;
+}
+
+/* .btn-size {
+    font-size : 1.5rem;
+} */
+
+/* .image-edit  img {
+    width : 100%;
+} */
+.test {
+    
+    color : red;
+}
+/* .btn {
+   width : 40%;
+    text-align : center !important;
+} */
+
+.calculate_price {
+    /* position : absolute;
+    bottom : 20%; */
+    font-style : bold;
+    font-size : 1rem;
+
+}
+
+.swap-parent {
+    margin-left : -0.5%;
+    margin-right : -5%;
+    margin-top : 1.7%;
+}
+.swap-parent-2 {
+    margin-left : 40%;
+    margin-right : -3%;
+    margin-top : -3%;
+    margin-bottom : 1%;
+}
+
+.swap-parent-3 {
+    margin-left : 36%;
+   
+    margin-top : 0.7%;
+}
+.swap {
+    width:40%;
+    height:40%;
+    cursor : pointer;
+}
+
+.swap-2 {
+    width:8%;
+    height:8%;
+    cursor : pointer;
+}
+
+.swap-3 {
+    width : 20%;
+    height : 20%;
+}
+
+.decorate {
+    color : darkblue;
+    margin-left : 4.5%;
+}
+.railways-name {
+    position : absolute;
+    top : 13%;
+    left : 50%;
+    color : white;
+}
+.remove {
+    font-size : 0.8rem;
+}
+.form-group.required:after {
+    content:"*";
+    color:red;
+  }
+
+  .initial-color {
+      color : silver;
+      font-weight : bold;
+  }
+.day-active {
+    color : green;
+    font-weight : bold;
+}
+
+
+@media (max-width: 800px) {
+    .test {
+        width : 100%;
+    }
+    /* .image-edit {
+        position : absolute;
+        top : 10%;
+        left : 40%; 
+        
+    } */
+    /* body {
+        background :  url('../img/indian-railways-history.jpg')  ;
+        background-repeat : no-repeat;
+        background-size: auto;
+        background-position: fixed  ;
+       
+        
+    } */
+
+    /* .calculate_price {
+        position : absolute;
+        top : 10%;
+    } */
+}

@@ -1,0 +1,125 @@
+<%- include('./includes/nav.ejs') -%>
+<br>
+<br>
+<br>
+<br>
+
+    <div class="container display-border">
+        <div class="form-group">
+            <h1 class="text-center">INDIAN RAILWAYS</h1>
+            <div class="from-group row">
+                <div class="col-md-9">
+            <h3>Date : <%= arr.booked_date %></h3>
+            </div>
+            <h3>Time : <%= arr.booked_time %></h3>
+            </div>
+            
+  
+  <h3 class="text-center">PNR Number: <%= arr.pnr %></h3>
+  <br>
+  <h2>Train Details</h2>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Train Number</th>
+        <th scope="col">Train Name</th>
+        
+        <th scope="col">Departure</th>
+        <th scope="col">Arrival </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row"><%= arr.train_id %></th>
+        <th><%= arr.train_name %> </th>
+        
+        <th><%= arr.dates %>,<%= arr.departure_time %> hrs</th>
+        <th><%= arr.new_dates %>,<%= arr.arrival_time %> hrs</th>
+      </tr>
+      
+    </tbody>
+  </table>
+  <br>
+  <h2>Ticket Details</h2>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        
+        <th scope="col">Boarding Station</th>
+        <th scope="col">Deboarding Station</th>
+        <th scope="col">Distance</th>
+        <!-- <th scope="col">Date Of Journey</th> -->
+        <th scope="col">Class</th>
+        <th scope="col">Duration (hrs)</th>
+        <th scope="col">Fare</th>
+        <th scope="col">No. of seats</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th><%= arr.source %></th>
+        <th><%= arr.destination %></th>
+        <th><%= arr.distance %> km</th>
+        <!-- <th><%= arr.dates %></th> -->
+        <th><%= arr.train_class %></th>
+        <th><%= arr.duration %></th>
+        <th>Rs.<%= arr.price %></th>
+        <th><%= arr.no_of_seats %></th>
+      </tr>
+      
+    </tbody>
+  </table>
+<br>
+<h2>Passenger Details</h2>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+        <th scope="col"></th> 
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Ticket-Status</th>
+      
+      <th scope="col">Seat-Number</th>
+      <th scope="col">Coach-Number</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(let i = 0;i<arr.passenger.length;i++) { %>
+    <tr>
+      <th><%=i+1%></th>
+      <th><%= arr.passenger[i].name %></th>
+      <th><%= arr.passenger[i].age %></th>
+      <th><%= arr.passenger[i].gender %></th>
+      
+      <th><%= arr.passenger[i].ticket_status %></th>
+      <% if (arr.passenger[i].ticket_status=='Confirmed') { %>
+      <th><%= arr.passenger[i].seat_no %></th>
+      <th><%= arr.passenger[i].coach_no %></th>
+      <% } else { %>
+        <th>----</th>
+        <th>----</th>
+    <% } %>
+    <% } %>
+    </tr>
+  </tbody>
+</table>
+
+        <div class="text-center">
+            <form action="/printTicket" method="POST">
+                <input type="hidden" name="arrival_time" value="<%= arr.arrival_time %>"> 
+                <input type="hidden" name="train_name" value="<%= arr.train_name %>"> 
+                <input type="hidden" name="departure_time" value="<%= arr.departure_time %>"> 
+                <input type="hidden" name="duration" value="<%= arr.duration %>"> 
+                <input type="hidden" name="distance" value="<%= arr.distance %>">
+            <input type="hidden" name="ticket_id" value="<%= arr.ticket_id %>"> 
+            <input type="hidden" name="pnr" value="<%= arr.pnr %>">
+            <input type="hidden" name="new_dates" value="<%= arr.new_dates %>">
+            <button  type="submit"   class="btn btn-success btn-lg ">Print E-Ticket</button>
+        </form>
+        </div>
+    
+    <br>
+</div>
+</div>
+    <%- include('./includes/end.ejs') -%>

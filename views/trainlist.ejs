@@ -1,0 +1,280 @@
+<%- include('./includes/nav.ejs') -%>
+    <br>
+    <br>
+    <br>
+    <br>
+
+   
+        <form action="/trains" class="needs-validation" method="POST" novalidate >
+           
+                <% if (is_maximum) { %>
+                <div class="display-border text-center fade-away" style="background-color:red; color:white;">
+                  <h4 >You have already booked 6 tickets this month !!</h4>
+                </div>
+              <% } %>
+            
+           <div class="form-row">
+                
+                <div class="form-group col-md-2" style="margin-left:70px;">
+                    <label for="source"><h4><strong>From : </strong></h4></label>
+                    <select class="custom-select"  name="source" id="source"  required >
+                        <% if(!set) { %>  <option selected disabled value="">Select source ...</option><% } %>
+                        <option value="Bengaluru" <% if (set) { if ( input_data.source =='Bengaluru') { %>selected<% }} %>>Bengaluru</option>
+                        <option value="Yeshwanthpur" <% if (set) { if ( input_data.source =='Yeshwanthpur') { %>selected<% }} %>>Yeshwanthpur</option>
+                        <option value="Puducherry" <% if (set) { if ( input_data.source =='Puducherry') { %>selected<% }} %>>Puducherry</option>
+                        <option value="Howrah" <% if (set) { if ( input_data.source =='Howrah') { %>selected<% }} %>>Howrah</option>
+                        <option value="Tumkur" <% if (set) { if ( input_data.source =='Tumkur') { %>selected<% }} %>>Tumkur</option>
+                        <option value="Vijayawada JN" <% if (set) { if ( input_data.source =='Vijayawada JN') { %>selected<% }} %>>Vijayawada JN</option>
+                        <option value="Tiptur" <% if (set) { if ( input_data.source =='Tiptur') { %>selected<% }} %>>Tiptur</option>
+                        <option value="Talguppa" <% if (set) { if ( input_data.source =='Talguppa') { %>selected<% }} %>>Talguppa</option>
+                        <option value="Bhubaneshwar" <% if (set) { if ( input_data.source =='Bhubaneshwar') { %>selected<% }} %>>Bhubaneshwar</option>
+                        <option value="Hazrat Nizamuddin" <% if (set) { if ( input_data.source =='Hazrat Nizamuddin') { %>selected<% }} %>>Hazrat Nizamuddin</option>
+                        <option value="Hubballi JN" <% if (set) { if ( input_data.source =='Hubballi JN') { %>selected<% }} %>>Hubballi JN</option>
+                        <option value="Davangere" <% if (set) { if ( input_data.source =='Davangere') { %>selected<% }} %>>Davangere</option>
+                    
+                    </select>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please provide the valid source
+                    </div>  
+                </div>
+                <div class="form-group col-sm-1 swap-parent">
+                    <h6 class="cant-see">.</h6>
+                    <img class="swap" src="/img/arrows.png" alt="swap">
+                   
+                </div>
+                <div class="form-group col-md-2">
+                <label for="destination"><h4><strong>To : </strong></h4></label>
+                <select class="custom-select"  name="destination" id="destination"  required >
+                    <% if(!set) { %><option selected disabled value="">Select destination ...</option><% } %>
+                    <option value="Bengaluru" <% if (set) { if ( input_data.destination =='Bengaluru') { %>selected<% }} %>>Bengaluru</option>
+                    <option value="Yeshwanthpur" <% if (set) { if ( input_data.destination =='Yeshwanthpur') { %>selected<% }} %>>Yeshwanthpur</option>
+                    <option value="Puducherry" <% if (set) { if ( input_data.destination =='Puducherry') { %>selected<% }} %>>Puducherry</option>
+                    <option value="Howrah" <% if (set) { if ( input_data.destination =='Howrah') { %>selected<% }} %>>Howrah</option>
+                    <option value="Tumkur" <% if (set) { if ( input_data.destination =='Tumkur') { %>selected<% }} %>>Tumkur</option>
+                    <option value="Vijayawada JN" <% if (set) { if ( input_data.destination =='Vijayawada JN') { %>selected<% }} %>>Vijayawada JN</option>
+                    <option value="Tiptur" <% if (set) { if ( input_data.destination =='Tiptur') { %>selected<% }} %>>Tiptur</option>
+                    <option value="Talguppa" <% if (set) { if ( input_data.destination =='Talguppa') { %>selected<% }} %>>Talguppa</option>
+                    <option value="Bhubaneshwar" <% if (set) { if ( input_data.destination =='Bhubaneshwar') { %>selected<% }} %>>Bhubaneshwar</option>
+                    <option value="Hazrat Nizamuddin" <% if (set) { if ( input_data.destination =='Hazrat Nizamuddin') { %>selected<% }} %>>Hazrat Nizamuddin</option>
+                    <option value="Hubballi JN" <% if (set) { if ( input_data.destination =='Hubballi JN') { %>selected<% }} %>>Hubballi JN</option>
+                    <option value="Davangere" <% if (set) { if ( input_data.destination =='Davangere') { %>selected<% }} %>>Davangere</option>
+                </select>
+                    <div class="valid-feedback">
+                    Looks good!
+                </div> 
+                <div class="invalid-feedback">
+                    Please provide the valid destination
+                </div>     
+                </div>
+
+                <div class="col-md-2">
+                    <label for="date"><h4><strong>Date : </strong></h4></label>
+                    <!-- <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                    
+                    </i>
+                    </div>
+                    </div> -->
+                    <input class="form-control " id="date-picker" type="text" name="date" id="date"  placeholder="dd-mm-yyyy" <% if (set) { %>value="<%= input_data.dates %>"<% } %> required autocomplete="off"  >
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Select a date
+                    </div>
+                </div>
+
+               
+                <div class="col-md-2">
+                    <label for="class"><h4><strong>Class :</strong></h4></label>
+                    <select  class="custom-select" name="train_class" id="class" required>
+                        <% if(!set) { %><option selected disabled value="">Choose...</option><% } %>
+                        <option value="All-Class" <% if (set) { if ( input_data.train_class =='All-Class') { %>selected<% }} %>>All-Class </option>
+                        <option value="1A" <% if (set) { if ( input_data.train_class =='1A') { %>selected<% }} %>>AC First Class (1A)</option>
+                        <option value="EC" <% if (set) { if ( input_data.train_class =='EC') { %>selected<% }} %>>Exec. Chair Car (EC)</option>
+                        <option value="2A" <% if (set) { if ( input_data.train_class =='2A') { %>selected<% }} %>>AC 2 Tier (2A)</option>
+                        <option value="3A" <% if (set) { if ( input_data.train_class =='3A') { %>selected<% }} %>>AC 3 Tier (3A)</option>
+                        <option value="3E" <% if (set) { if ( input_data.train_class =='3E') { %>selected<% }} %>>AC 3 Economy (3E)</option>
+                        <option value="CC" <% if (set) { if ( input_data.train_class =='CC') { %>selected<% }} %>>AC Chair Car (CC)</option>
+                        <option value="SL" <% if (set) { if ( input_data.train_class =='SL') { %>selected<% }} %>>Sleeper (SL)</option>
+                        <option value="2S" <% if (set) { if ( input_data.train_class =='2S') { %>selected<% }} %>>Second Sitting (2S)</option>
+                    </select>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        select class
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <label for="class"><h4><strong>Passengers :</strong></h4></label>
+                    <select name="no_of_passengers" id="no_of_passengers" class="custom-select">
+                        <option selected disabled value="">No. of Passengers</option>
+                        <option value="1"  <% if (set) { if ( input_data.no_of_passengers =='1') { %>selected<% }} %>>1</option>
+                        <option value="2"  <% if (set) { if ( input_data.no_of_passengers =='2') { %>selected<% }} %>>2</option>
+                        <option value="3"  <% if (set) { if ( input_data.no_of_passengers =='3') { %>selected<% }} %>>3</option>
+                        <option value="4"  <% if (set) { if ( input_data.no_of_passengers =='4') { %>selected<% }} %>>4</option>
+                    </select>
+                    <!-- <input class="form-control"  type="number" name="no_of_passengers" min="1" max="6" step="1" value="1"> -->
+                </div>
+               
+            </div>
+            <div class="form-row text-center">
+                <div class="col-md-3 text-center cant-see">
+                    <button class="btn btn-primary btn-lg  btn-block  " type="submit"> Search </button>
+                </div>
+                <div class="col-md-6 text-center">
+                    <button class="btn btn-primary btn-lg  btn-block loader " type="submit"><strong> Search</strong> </button>
+                </div>
+                <div class="col-md-3 text-center cant-see">
+                    <button class="btn btn-primary btn-lg  btn-block  " type="submit"> Search </button>
+                </div>
+            </div>
+        </form>
+    
+
+    <br class="loading-down">
+    
+    <div class="container">
+        <% if (set) { %>
+            <% if(arr.length > 0) { %>
+                <form action="">
+                <div class="form-inline">
+                    <div class=" col-md-3">
+                    <h5 style="color : darkblue;">Train Name</h5>
+                    </div>
+                    <div class=" col-md-1">
+                    <h5 style="color : darkblue;">Depart</h5>
+                </div>
+                    <div class=" col-md-1">
+                    <h5 style="color : darkblue;">Arrive</h5>
+                </div>
+                <div class=" col-md-2">
+                    <h5 style="color : darkblue;"> Duration(hrs)</h5>
+                </div>
+                    <div class=" col-md-2">
+                        <h5 style="color : darkblue; margin-left:0px">Class</h5>
+                    </div>
+                    
+                </div>
+
+                </form>
+                <ul>
+                    <% for(let i of arr) { %>
+                    <div class="display-border">
+                        <li>
+                           
+                               
+                                    <form action="/book" method="POST" class="form-inline btn-reappear-<%= i.train_id %>">
+                                        <div class=" col-md-3">
+                                            <h5 ><%= i.Name %></h5>
+                                            <h6>(<%= i.train_id %>)</h6>
+                                            <% if (i.train_availability.toString().slice(0,7)=='0123456') { %>
+                                                <h6>Departs on : <strong>All days</strong></h6>
+                                            <% } else { %>
+                                            <h6 class="initial-color"><span style="color:black">Departs on : </span> 
+                                                <span class="<% if (i.train_availability.toString().slice(0,1)=='0') { %>day-active<% } %>">S</span>
+                                                <span class="<% if (i.train_availability.toString().slice(1,2)=='1') { %>day-active<% } %>">M</span>
+                                                <span class="<% if (i.train_availability.toString().slice(2,3)=='2') { %>day-active<% } %>">T</span>
+                                                <span class="<% if (i.train_availability.toString().slice(3,4)=='3') { %>day-active<% } %>">W</span>
+                                                <span class="<% if (i.train_availability.toString().slice(4,5)=='4') { %>day-active<% } %>">T</span>
+                                                <span class="<% if (i.train_availability.toString().slice(5,6)=='5') { %>day-active<% } %>">F</span>
+                                                <span class="<% if (i.train_availability.toString().slice(6,7)=='6') { %>day-active<% } %>">S</span>
+                                            </h6>
+                                            <% } %>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <h5><%= i.departure_time %></h5>
+                                            <h6 class="cant-see">.</h6>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <h5><%= i.arrival_time %></h5>
+                                            <% if (i.new_dates) { %>
+                                                <p class="color-picker">(<%= i.new_words_date %>)</p>
+                                            <% } %>
+                                           
+                                        </div>
+                                        
+                                        <div class="col-md-1">
+                                            <h5><%= i.duration %></h5>
+                                            <h6 class="cant-see">.</h6>
+                                        </div>
+                                        
+                                        
+                                        <div class="col-md-2">
+                                            <select name="new_train_class" value="<%= i.train_id %>" id="class" class="custom-select" autocomplete="off">
+                                             <% if(i.ac1_tier) { %>    <option value="1A" <% if (set) { if ( input_data.train_class =='1A') { %>selected<% }} %>>AC First Class (1A)</option><% } %>
+                                             <% if(i.tier1_economy) { %>    <option value="EC" <% if (set) { if ( input_data.train_class =='EC') { %>selected<% }} %>>Exec. Chair Car (EC)</option><% } %>
+                                             <% if(i.ac2_tier) { %>    <option value="2A" <% if (set) { if ( input_data.train_class =='2A') { %>selected<% }} %>>AC 2 Tier (2A)</option><% } %>
+                                             <% if(i.ac3_tier) { %>   <option value="3A" <% if (set) { if ( input_data.train_class =='3A') { %>selected<% }} %>>AC 3 Tier (3A)</option><% } %>
+                                             <% if(i.tier3_economy) { %>    <option value="3E" <% if (set) { if ( input_data.train_class =='3E') { %>selected<% }} %>>AC 3 Economy (3E)</option><% } %>
+                                             <% if(i.ac_chair) { %>   <option value="CC" <% if (set) { if ( input_data.train_class =='CC') { %>selected<% }} %>>AC Chair Car (CC)</option><% } %>
+                                             <% if(i.sleeper) { %>   <option value="SL" <% if (set) { if ( input_data.train_class =='SL') { %>selected<% }} %>>Sleeper (SL)</option><% } %>
+                                             <% if(i.second_sitting) { %>   <option value="2S" <% if (set) { if ( input_data.train_class =='2S') { %>selected<% }} %>>Second Sitting (2S)</option><% } %>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class=" col-md-3">
+                                            <button type="button" onclick="checkAvailability(this)" class="btn btn-success btn-block"><strong>Check Availability and fare</strong></button>
+                                        </div>
+                                        
+                                        
+                                        <input type="hidden" name="train_name" value="<%= i.Name %>">
+                                        <input type="hidden" name="source" value="<%= i.source %>">
+                                        <input type="hidden" name="destination" value="<%= i.destination %>">
+                                        <input type="hidden" name="dates" value="<%= i.dates %>">
+                                        <input type="hidden" name="distance" value="<%= i.distance %>">
+                                        <input type="hidden" name="train_type"  value="<%= i.train_type %>">
+                                        <input type="hidden" name="train_id" value="<%= i.train_id %>">
+                                        <input type="hidden" name="train_class"  value="<%= i.train_class%>">
+                                        <input type="hidden" name="seats" value="<%= i.seats %>">
+                                        <input type="hidden" name="arrival_time" value="<%= i.arrival_time %>">
+                                        <input type="hidden" name="departure_time" value="<%= i.departure_time %>">
+                                        <input type="hidden" name="duration" value="<%= i.duration %>">
+                                        <input type="hidden" name="new_dates" value="<%= i.new_dates %>">
+                                        <input type="hidden" name="set_value" value="<%= set %>">
+                                        <input type="hidden" name="no_of_passengers" value="<%= input_data.no_of_passengers %>">
+                                    </form>
+                                
+                            
+                        </li>
+                    </div>
+                    <% } %>
+                </ul>
+            <% } else { %>
+                <h1>No trains are available between these stations for the specified search filter</h1>
+            <% } %>
+        <% } %>
+    </div>
+    <!-- <div class="container">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/V5DV6uHQO7U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div> -->
+    
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+          'use strict';
+          window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+              form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+              }, false);
+            });
+          }, false);
+        })();
+        </script>
+<script src="/js/async.js"></script>
+<script src="/js/starting_page.js"></script>
+<%- include('./includes/end.ejs') -%>
+    

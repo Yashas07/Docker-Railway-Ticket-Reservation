@@ -1,0 +1,94 @@
+<%- include('./includes/nav.ejs') -%>
+<br>
+<br>
+<br>
+<br>
+<div class="container " style="text-align:center; margin-left:350px">
+    <form action="/trainSchedule" method="POST">
+        <div class="form-group ">
+            <div class=" col-md-6" style="text-align:center;">
+            <label for="train_id"><h3><strong>Select Train To Check Schedule</strong></h3></label>
+            <select class="custom-select" name="train_id" id="train_id" >
+                <% if(!set) { %><option selected disabled value="">Select ...</option><% } %>
+               <option value="1234" <% if (set) { if ( train_details[0].id == '1234') { %>selected<% }} %>>Hubbali Jan-ShatabDhi Express</option>
+               <option value="1235" <% if (set) { if ( train_details[0].id == '1235') { %>selected<% }} %>>Talguppa Intercity Express</option>
+               <option value="1236" <% if (set) { if ( train_details[0].id ==' 1236') { %>selected<% }} %>>Dadar Central Express</option>
+               <option value="1238" <% if (set) { if ( train_details[0].id == '1238') { %>selected<% }} %>>Talguppa-Mysuru Express</option>
+               <option value="1237" <% if (set) { if ( train_details[0].id == '1237') { %>selected<% }} %>>Hazrat Nizamuddin Rajdhani Express</option>
+               <option value="1239" <% if (set) { if ( train_details[0].id == '1239') { %>selected<% }} %>>Yeshwanthpur Duronto Express</option>
+            </select>
+            </div>
+            <br>
+            <div class="col-md-6 text-center">
+            <button type="submit" class="btn btn-primary btn-lg">Check Schedule</button>
+        </div>
+        </div>
+    </form>
+</div>
+
+<% if (set) { %>
+ <div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Train Number</th>
+            <th scope="col">Train Name</th>
+            <th scope="col">Start</th>
+            <th scope="col">End</th>
+            <th scope="col">Train Type</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><%= train_details[0].id %></th>
+            <td><%= train_details[0].Name %> </td>
+            <td><%= train_details[0].Start_point %></td>
+            <td><%= train_details[0].End_point %></td>
+            <td><%= train_details[0].train_type %></td>
+          </tr>
+        </tbody>
+      </table>
+    <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Station</th>
+            <th scope="col">Distance</th>
+            <th scope="col">Arrival</th>
+            <th scope="col">Departure</th>
+            <th scope="col">Duration(hrs)</th>
+            <th scope="col">Day</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+        <% for(let station of arr) { %>
+          <tr>
+            <th scope="row"><%= station.Name %></th>
+            <td><%= station.distance %> Km</td>
+            <td><%= station.arrival_time %> hrs</td>
+            <td><%= station.departure_time %> hrs</td>
+            <td><%= station.duration %></td>
+            <td><%= station.day %></td>
+            <td>
+                <h6 class="initial-color"><span style="color:black">Departs on : </span> 
+                    <span class="<% if (station.train_availability.toString().slice(0,1)=='0') { %>day-active<% } %>">S</span>
+                    <span class="<% if (station.train_availability.toString().slice(1,2)=='1') { %>day-active<% } %>">M</span>
+                    <span class="<% if (station.train_availability.toString().slice(2,3)=='2') { %>day-active<% } %>">T</span>
+                    <span class="<% if (station.train_availability.toString().slice(3,4)=='3') { %>day-active<% } %>">W</span>
+                    <span class="<% if (station.train_availability.toString().slice(4,5)=='4') { %>day-active<% } %>">T</span>
+                    <span class="<% if (station.train_availability.toString().slice(5,6)=='5') { %>day-active<% } %>">F</span>
+                    <span class="<% if (station.train_availability.toString().slice(6,7)=='6') { %>day-active<% } %>">S</span>
+                </h6>
+            </td>
+          </tr>
+        <% } %>
+        </tbody>
+      </table>
+ </div>
+
+
+
+
+<% } %>
+<%- include('./includes/end.ejs') -%>

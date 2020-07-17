@@ -1,0 +1,135 @@
+<%- include('./includes/nav.ejs') -%>
+<br>
+<br>
+<br>
+    <div class="container">
+        <form action="/check_payment" id="demo" method="POST" >
+            <div style="position:fixed; left:870px; top:140px; "  class="form-group">
+                <div class="display-border" style="background-color:#e3f2fd; padding:10px">
+                    
+                    <h2 class="text-center" style="color:blueviolet"><%= arr.name %></h2>
+                    <h4  class="text-center">
+                    <% if(arr.train_class=='1A'){  %> AC First Class(1A)<% } %>
+                    <% if(arr.train_class=='EC') {  %> Exec. Chair Car(EC)<% } %>
+                    <% if(arr.train_class=='2A') {  %>AC 2 Tier(2A)<% } %>
+                    <% if(arr.train_class=='3A') {  %> AC 3 Tier(3A)<% } %>
+                    <% if(arr.train_class=='3E') {  %> AC 3 Economy(3E)<% } %>
+                    <% if(arr.train_class=='CC') {  %> AC Chair Car(CC)<% } %>
+                    <% if(arr.train_class=='SL') {  %> Sleeper(SL)<% } %>
+                    <% if(arr.train_class=='2S') {  %> Second Sitting(2S)<% } %></h4>
+                    <br>
+                    <h6 class="text-center"><%= arr.dates %></h6>
+                    <h2 class="text-center"><%= arr.source%></h2>
+                    <h6 class="text-center">Departure : <%= arr.departure_time %></h6>
+                    <div class="text-center">
+                    <img style="width:10%; height:10%" src="/img/down-arrow.png" alt="Down-arrow">
+                    </div>
+                    <h6 class="text-center"><%= arr.new_dates %></h6>
+                    <h2 class="text-center"><%= arr.destination %></h2>
+                    <h6 class="text-center">Arrival : <%= arr.arrival_time %></h6>
+                    
+                    
+                </div>
+            </div>
+            <!-- <div class="form-row">
+            <div class="col-md-2">
+                <label for="name">Name </label>
+                <input class="form-control train_name" type="text" name="name" value="<%= arr.name %>" disabled> 
+            </div>
+            <div class="col-md-2">
+                <label for="source">Source</label>
+                <input class="form-control source" type="text" name="source" value="<%= arr.source%>" disabled> 
+            </div>
+            <div class="col-md-2">
+                <label for="destination">Destination</label>
+                <input class="form-control destination" type="text" name="destination" value="<%= arr.destination %>" disabled>
+            </div>
+            <div class="col-md-2">
+                <label for="Date">Date </label>
+                <input class="form-control dates" type="text" name="dates" value="<%= arr.dates %>" disabled>
+            </div>
+            
+            
+           
+                <div class="col-md-2">
+                    <label for="class">Class </label>
+                    <select name="train_class" id="class" class="custom-select train_class" disabled>
+                        <option value="1A" <%  if ( arr.train_class =='1A') { %>selected<% } %>>AC First Class (1A)</option>
+                        <option value="EC" <%  if ( arr.train_class =='EC') { %>selected<% } %>>Exec. Chair Car (EC)</option>
+                        <option value="2A" <%  if ( arr.train_class =='2A') { %>selected<% } %>>AC 2 Tier (2A)</option>
+                        <option value="3A" <%  if ( arr.train_class =='3A') { %>selected<% } %>>AC 3 Tier (3A)</option>
+                        <option value="3E" <%  if ( arr.train_class =='3E') { %>selected<% } %>>AC 3 Economy (3E)</option>
+                        <option value="CC" <%  if ( arr.train_class =='CC') { %>selected<% } %>>AC Chair Car (CC)</option>
+                        <option value="SL" <%  if ( arr.train_class =='SL') { %>selected<% } %>>Sleeper (SL)</option>
+                        <option value="2S" <%  if ( arr.train_class =='2S') { %>selected<% } %>>Second Sitting (2S)</option>
+                    </select>
+                </div>
+           
+        </div> -->
+            <br>
+            <h2><strong>ADD PASSENGER DETAILS</strong></h2>
+            <input class="form-control distance" type="hidden" name="distance" value="<%= arr.distance %>">
+            <input class="form-control train_type" type="hidden" name="train_type" value="<%= arr.train_type %>">
+            <input class="form-control" type="hidden" name="train_id" value="<%= arr.train_id %>">
+            <input class="form-control seats_booked" type="hidden" name="seats" value="<%= arr.seats %>">
+            <input type="hidden" name="arrival_time" value="<%= arr.arrival_time %>">
+            <input type="hidden" name="fare" value="<%= arr.fare %>">
+            <input class="train_name" type="hidden" name="name" value="<%= arr.name %>"> 
+            <input class="source" type="hidden" name="source" value="<%= arr.source%>"> 
+            <input class="destination" type="hidden" name="destination" value="<%= arr.destination %>">
+            <input class="dates" type="hidden" name="dates" value="<%= arr.dates %>" >
+            <input class="train_class" type="hidden" name="train_class" value="<%= arr.train_class %>" >
+            <input class="new_dates" type="hidden" name="new_dates" value="<%= arr.new_dates %>" >
+            <input class="no_of_passengers" type="hidden" name="no_of_passengers" value="<%= arr.no_of_passengers %>" >
+        <input type="hidden" name="departure_time" value="<%= arr.departure_time %>">
+        <input type="hidden" name="duration" value="<%= arr.duration %>">
+            <div class="js_1 custom-border">
+                <div class=" form-row">
+                    <div class="col-md-6">
+                        <label for="passenger_name_1">Name </label>
+                        <input class="form-control" type="text" name="passenger_name_1" id="passenger_name_1" autocomplete="off">
+                    </div>
+                    <div class="col-md-2">
+                        <label for="age_1">Age</label>
+                        <input class="form-control" type="number" name="age_1" id="age_1">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="gender_1">Gender</label>
+                        <select class="custom-select"  name="gender_1" id="gender_1">
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+                            <option value="O">Others</option>
+                        </select>
+                    </div>
+                </div>
+               
+                <div class="form-row">
+                    
+                    <div class="col-md-6">
+                        <br>
+                        <!-- <button type="button" class="btn btn-danger calculate_price">Save</button> -->
+                        <button type="button" class="btn btn-success calculate_price"><b>Save</b></button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- <div id="demo">
+
+            </div> -->
+            <div class="add-passenger">
+                <p href="/">
+                    <img class="img_1" src="/img/ui.png" alt="Add passenger"><strong>ADD PASSENGER</strong>
+                </p>
+            </div>
+            <br>
+            <h1>Fare : Rs.<span class="price"><%= arr.fare %></span></h1>
+            <br>
+            <div class="form-row">
+                <div class="col-md-7">
+                    <button type="submit" class="btn btn-primary btn-lg disable_remove">Book your ticket</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="/js/index.js"></script>
+<%- include('./includes/end.ejs') -%>

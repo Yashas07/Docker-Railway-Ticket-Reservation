@@ -1,0 +1,173 @@
+<%- include('./includes/nav.ejs') -%>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+<div class="container">
+    <div class="form-group text-center">
+        <h1 style="color:black">Welcome <%= user.first_name %>!!</h1>
+    </div>
+</div>
+<div class="container text-center">  <!-- form-inline needs to added after introducing cancelled tickets -->
+    
+    
+    <div class="form-group col-md-6 ">
+    <form action="/view_booked_tickets" method="POST">
+        <button style="margin-left:270px;" type="submit" class="btn btn-primary btn-lg btn-block"><strong>View Tickets</strong></button>
+    </form>
+    </div>
+    
+    <!-- <div class="col-md-6">
+    <form action="/view_cancelled_tickets" method="POST">
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Cancelled Tickets</button>
+    </form>
+    </div> -->
+</div>
+    <br>
+    <br class="loading-down">
+    <% if (set) { %>
+    <% if (tickets.length>0) { %>
+        <div class="container ">
+            <% for (let ticket of tickets) { %>
+                
+            <div class="display-border ">
+                
+                <form action="/printTicket" method="POST" class="form-group btn-reappear-<%= ticket.ticket_id %>">
+                    <div class="form-inline">
+                        <div class="col-md-2">
+                            <h5 style="color : darkblue;">PNR Number  : </h5>
+                        </div>
+                        <div class="col-md-2">
+                            <h6 ><%= ticket.pnr %></h6>
+                        </div>
+                        <div class="col-md-1">
+                            <h5 style="color : darkblue;">Class : </h5>
+                        </div>
+                        <div class="col-md-1">
+                            <h6 ><%= ticket.class %></h6>
+                        </div>
+                    
+                    </div>
+                    <div class="form-inline">
+                        <div class="col-md-2">
+                            <h5 style="color : darkblue;">Departure : </h5>
+                        </div>
+                        <div class="col-md-2">
+                            <h6><%= ticket.journey_date %>,<%= ticket.departure_time %></h6>
+                        </div>
+                        <div class="col-md-1">
+                            <h5 style="color : darkblue;">Arrival: </h5>
+                        </div>
+                        <div class="col-md-2">
+                            <h6 ><%= ticket.arrival_date %>,<%= ticket.arrival_time %></h6>
+                        </div>
+                    </div>
+                    <input type="hidden" name="ticket_id" value="<%= ticket.ticket_id %>">
+                    <div class="form-inline">
+                        <div class="col-md-2">
+                        <h5 style="color : darkblue;">Train Name : </h5>
+                    </div>
+                    <div class="col-md-2">
+                        <h6 ><%= ticket.Name %></h6>
+                    </div>
+                    <div class="col-md-1">
+                        <h5 style="color : darkblue;" >Seats :</h5>
+                    </div>
+                    <div class="col-md-1">
+                        <h6 id="seats"><%= ticket.no_of_seats %></h6>
+                    </div>
+                    
+                    </div>
+                    <div class="form-inline">
+                    <div class="col-md-2">
+                        <h5 style="color : darkblue;">Booked Date : </h5>
+                    </div>
+                    <div class="col-md-2">
+                        <h6 ><%= ticket.Date %></h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h5 style="color : darkblue;">Booked Time: </h5>
+                    </div>
+                    <div class="col-md-2">
+                        <h6 ><%= ticket.time %></h6>
+                    </div>
+                    
+                    </div>
+                    
+                    <div class="form-inline">
+                   
+                    <div class="col-md-2">
+                        <h5 style="color : darkblue;">Source:</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <h6 ><%= ticket.source %></h6>
+                    </div>
+                    <div class="col-md-2">
+                        <h5 style="color : darkblue;">Destination : </h5>
+                    </div>
+                    <div class="col-md-2">
+                        <h6 ><%= ticket.destination %></h6>
+                    </div>
+                    </div>
+                    
+                    
+                    <div class="form-inline">
+                        <div class="col-md-2">
+                            <h5 style="color : darkblue;">Distance : </h5>
+                        </div>
+                        <div class="col-md-2">
+                            <h6 ><%= ticket.distance %> km</h6>
+                        </div>
+                        <div class="col-md-2">
+                            <h5 style="color : darkblue;">Duration(hrs) : </h5>
+                        </div>
+                        <div class="col-md-1">
+                            <h6 ><%= ticket.duration%></h6>
+                        </div>
+                    </div>
+                    <div class="form-inline">
+                        <div class="col-md-2">
+                            <h5 style="color : darkblue;">Fare : </h5>
+                        </div>
+                        <div class="col-md-2">
+                            <h6 id="updated-price">Rs.<%= ticket.price %></h6>
+                        </div>
+                        
+                    </div>
+                    <div class="form-inline">
+                    <div class="col-md-2">
+                        <button type="button" onclick="viewDetails(this)" class="btn btn-secondary loader ">View Details</button>
+                    </div>
+                    <div class="col-md-2">
+                        
+                            <input type="hidden" name="arrival_time" value="<%= ticket.arrival_time %>"> 
+                            <input type="hidden" name="train_name" value="<%= ticket.Name %>"> 
+                            <input type="hidden" name="departure_time" value="<%= ticket.departure_time %>"> 
+                            <input type="hidden" name="duration" value="<%= ticket.duration %>"> 
+                            <input type="hidden" name="distance" value="<%= ticket.distance %>">
+                        <!-- <input type="hidden" name="ticket_id" value="<%= ticket.ticket_id %>">  -->
+                        <input type="hidden" name="new_dates" value="<%= ticket.new_dates %>">
+                        <input type="hidden" name="pnr" value="<%= ticket.pnr %>">
+                        <button  type="submit"   class="btn btn-success ">Print E-Ticket</button>
+                    
+                    </div>
+                    </div>
+                    </form>
+
+                    
+                </div>
+            <% } %>
+        </div>
+    <% } else { %>
+        <div class="container">
+            <h2>No tickets booked</h2>
+        </div>
+   <% } %>
+   <% } %>
+<script src="/js/auth.js"></script>
+<%- include('./includes/end.ejs') -%>

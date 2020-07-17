@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="shortcut icon" href="/img/logo.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/css/starting_page.css">
+    <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/extra.css">
+    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"/>
+</head>
+
+<body >
+
+
+
+    <!-- <div class="fixed-top">
+        <nav class="nav nav-pills flex-column flex-sm-row">
+            <a class="flex-sm-fill text-sm-center nav-link home <% if (page=='home') { %>active<% } %>" href="/">Home</a>
+            <a class="flex-sm-fill text-sm-center nav-link home <% if (page=='ticket') { %>active<% } %>" href="/">Ticket</a>
+            <a class="flex-sm-fill text-sm-center nav-link contact <% if (page=='contact') { %>active<% } %>" href="/contact">Contact</a>
+            <a class="flex-sm-fill text-sm-center nav-link pnr_status <% if (page=='pnr_status') { %>active<% } %>" href="/pnr_status">PNR Status</a>
+            <% if(!isLoggedIn) { %>
+            <a class="flex-sm-fill text-sm-center nav-link register <% if (page=='register') { %>active<% } %>" href="/register">Register</a>
+            <a class="flex-sm-fill text-sm-center nav-link login <% if (page=='login') { %>active<% } %>" href="/login" tabindex="-1" aria-disabled="true">Login</a>
+            <% } else { %>
+                <a class="flex-sm-fill text-sm-center nav-link login <% if (page=='dashboard') { %>active<% } %>" href="/dashboard" tabindex="-1" aria-disabled="true">Dashboard</a>
+            <a class="flex-sm-fill text-sm-center nav-link login <% if (page=='logout') { %>active<% } %>" href="/logout" tabindex="-1" aria-disabled="true">Logout</a>
+           
+            <% } %>
+        </nav>
+    </div> -->
+
+    
+      
+      <!-- <nav class="navbar navbar-light" style="background-color: #e3f2fd;"> -->
+        <nav class="navbar navbar-expand-lg navbar-light  fixed-top" style="background-color: #e3f2fd;">
+            <a class="navbar-brand" href="/">
+                <img src="/img/logo.png" width="40" height="40" alt="Brand" style="border:1px solid black; padding:3px; border-radius:6px">
+              </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a style="color:black" class="nav-item nav-link  home " href="/"><% if (page=='home') { %><strong style="color:darkblue;" >Home</strong><% } else { %>Home<% } %></a>
+                <a style="color:black" class="nav-item nav-link booking" href="/booking"><% if (page=='booking') { %><strong style="color:darkblue;" >Booking</strong><% } else { %>Booking<% } %></a>
+                <a style="color:black" class="nav-item nav-link pnr-status" href="/pnr_status"><% if (page=='pnr_status') { %><strong style="color:darkblue;" >PNR-Status</strong><% } else { %>PNR-Status<% } %></a>
+                <a style="color:black" class="nav-item nav-link train-schedule" href="/trainSchedule"><% if (page=='train-schedule') { %><strong style="color:darkblue;" >Train Schedule</strong><% } else { %>Train-Schedule<% } %></a>
+                <a style="color:black" class="nav-item nav-link contact" href="/contact"><% if (page=='contact') { %><strong style="color:darkblue;" >Contact-Us</strong><% } else { %>Contact-Us<% } %></a>
+                <% if(!isLoggedIn) { %>
+                <a style="color:black; margin-right : 10px; margin-left:300px " class="nav-item nav-link register" href="/register"><% if (page=='register') { %><strong style="color:darkblue;" >Register</strong><% } else { %>Register<% } %></a>
+                <a style="color:black" class="nav-item nav-link login" href="/login"><% if (page=='login') { %><strong style="color:darkblue;" >Login</strong><% } else { %>Login<% } %></a>
+                <% } else { %>
+                    <a style="color:black; margin-right : 10px; margin-left:250px " class="nav-item nav-link register" href="/dashboard"><% if (page=='dashboard') { %><strong style="color:darkblue;" >Dashboard</strong><% } else { %>Dashboard<% } %></a>
+                    <a style="color:black" class="nav-item nav-link login" href="/logout"><% if (page=='logout') { %><strong style="color:darkblue;" >Logout</strong><% } else { %>Logout<% } %></a>    
+                <% } %>
+                </div>
+            </div>
+          </nav>
+      <!-- </nav> -->

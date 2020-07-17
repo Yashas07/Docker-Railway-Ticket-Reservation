@@ -1,0 +1,22 @@
+.sample {
+    position : fixed;
+    z-index : 1000;
+    left : 7.75%;
+}
+
+
+.nav-link {
+    color : black;
+    font-size: 1.5rem;
+    margin-right : 10px;
+    margin-left:10px
+}
+
+.nav-link:hover {
+    color:red !important;
+    
+}
+/* .nav-link:active {
+    color : white;
+    background-color : #007bff;
+} */

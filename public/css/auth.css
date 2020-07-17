@@ -1,0 +1,32 @@
+/* .font-edit {
+    font-style : Helvetica;
+    font-size : 1rem;
+} */
+
+.display-border-3 {
+    border : 1px solid black;
+    margin-bottom : 1%;
+    border-radius : 10px;
+    background-color : white;
+    width : 70%;
+}
+
+/* .error {
+  
+    background-color:rgb(228, 30, 30);
+    font-style : bold;
+    color : green;
+} */
+
+.backdrop {
+    background-color : silver;
+    
+}
+
+.change-background {
+    color : red;
+    position : absolute;
+    z-index : 1000000;
+}
+
+
