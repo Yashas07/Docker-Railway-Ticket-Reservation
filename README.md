@@ -8,7 +8,7 @@ Requirements:
 
 Steps :
 
-Step 1: Download the docker-compose.yml file and go to the repository where it is stored.
+Step 1: Download the docker-compose.yml file and go to the directory where it is stored.
 
 Step 2: Start the app by the command  (sudo docker-compose up -d).
 
