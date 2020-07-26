@@ -132,7 +132,6 @@ exports.postDeleteTicket = (req,res,next) => {
     let total_passengers_length = req.body.total_passengers_length;
     let state = false;
     if(passengers_to_be_deleted.length==total_passengers_length)
-    
     {
         // delete all the passengers
         state = 'all';
@@ -174,7 +173,7 @@ exports.postDeleteTicket = (req,res,next) => {
     let updatedPrice = 0;
     let consider_new_updation = false;
     let new_diff = false;
-
+    var second_max; 
     let query = `select * from passengers join ticket on  tick_id=ticket_id and tick_id=${ticket_id} and id in (:passenger_ids)`
     db.query(query,{
         replacements : { passenger_ids : passenger_ids },
@@ -202,24 +201,46 @@ exports.postDeleteTicket = (req,res,next) => {
             {
                 // consider different updating strategy
                 // i.e new update needs to be added
+
+                let sum1 = 0;
+                let sum2 = 0;
+                for(let i = min_waitlist_value;i<=max_waitlist_value;i++)
+                {
+                   
+                    sum1 += i;
+                }
+
+                for(let i = 0;i<result.length;i++)
+                {
+                    if(result[i].ticket_status.toString().slice(0,3)!='CNF')
+                    sum2 += result[i].status_num;
+                }
+
+                second_max = sum1 - sum2;
                 consider_new_updation = 'two';
                 new_diff = max_waitlist_value-min_waitlist_value;
             }
         }
-        let second_max;         // to get to know the inbetween number for decrementing
+               // to get to know the inbetween number for decrementing
         if(no_of_waitlisted_tickets==3)
         {
             if(max_waitlist_value-min_waitlist_value>2)
             {
                 // consider different updating strategy
                 // i.e new update needs to be added
+                let sum1 = 0;
+                let sum2 = 0;
+                for(let i = min_waitlist_value;i<=max_waitlist_value;i++)
+                {
+                    sum1 += i;
+                }
+
                 for(let i = 0;i<result.length;i++)
                 {
-                    if(result[i].status_num!=max_waitlist_value || result[i].status_num!=min_waitlist_value)
-                    {
-                        second_max = result[i].status_num;
-                    }
+                    sum2 += result[i].status_num;
                 }
+
+                second_max = sum1 - sum2;
                 consider_new_updation = 'three';
                 new_diff = max_waitlist_value-min_waitlist_value;
             }
@@ -341,7 +362,7 @@ exports.postDeleteTicket = (req,res,next) => {
             for (let i of passengers)
             {
                 
-                    if(i.ticket_status.toString().slice(0,3)=='CNF')
+                if(i.ticket_status.toString().slice(0,3)=='CNF')
                 {
                     if(max_confirmed_seats > confirmed_seats)
                     {
@@ -441,15 +462,22 @@ exports.postDeleteTicket = (req,res,next) => {
         console.log(wl_updated.status_num.length)
         for(let i = 0;i<wl_updated.status_num.length;i++)
         {
-         db.query(`update passengers set status_num=${wl_updated.status_num[i]},ticket_status='${wl_updated.ticket_status[i]}',coach_no='${wl_updated.coach_no[i]}' where ticket_status LIKE 'WL%' and status_num=${i+1+no_of_waitlisted_tickets} and tick_id in (select ticket_id from ticket where journey_date LIKE '${date}' AND class LIKE '${train_class}' AND train_id LIKE '${train_id}')`)
+           if(consider_new_updation=='two' && new_diff==2 && wl_updated.status_num.length==1)
+            {
+                db.query(`update passengers set status_num=${wl_updated.status_num[i]},ticket_status='${wl_updated.ticket_status[i]}',coach_no='${wl_updated.coach_no[i]}' where ticket_status LIKE 'WL%' and status_num=${second_max} and tick_id in (select ticket_id from ticket where journey_date LIKE '${date}' AND class LIKE '${train_class}' AND train_id LIKE '${train_id}')`)
+            }
+            else
+            {
+            db.query(`update passengers set status_num=${wl_updated.status_num[i]},ticket_status='${wl_updated.ticket_status[i]}',coach_no='${wl_updated.coach_no[i]}' where ticket_status LIKE 'WL%' and status_num=${i+1+no_of_waitlisted_tickets} and tick_id in (select ticket_id from ticket where journey_date LIKE '${date}' AND class LIKE '${train_class}' AND train_id LIKE '${train_id}')`)
+            }
         }
         return db.query('select * from class');
     
     })
     .then(result => {
-        if(consider_new_updation=='two')
+        if(consider_new_updation=='two') 
         {
-            if(new_diff>2)
+            if(new_diff==3)
             {
                 db.query(`update passengers set status_num = status_num-${wl_updated.status_num.length +1} where ticket_status LIKE 'WL%' and  status_num > ${min_waitlist_value}  and status_num < ${max_waitlist_value-1} and tick_id in (select ticket_id from ticket where journey_date LIKE '${date}' AND class LIKE '${train_class}' AND train_id LIKE '${train_id}')`)
                 db.query(`update passengers set status_num = status_num-${wl_updated.status_num.length +1} where ticket_status LIKE 'WL%' and  status_num > ${min_waitlist_value+1}  and status_num < ${max_waitlist_value} and tick_id in (select ticket_id from ticket where journey_date LIKE '${date}' AND class LIKE '${train_class}' AND train_id LIKE '${train_id}')`)
@@ -457,20 +485,23 @@ exports.postDeleteTicket = (req,res,next) => {
             }
             else
             {
-             db.query(`update passengers set status_num = status_num-${wl_updated.status_num.length + new_diff-1} where ticket_status LIKE 'WL%' and  status_num > ${min_waitlist_value}  and status_num < ${max_waitlist_value} and tick_id in (select ticket_id from ticket where journey_date LIKE '${date}' AND class LIKE '${train_class}' AND train_id LIKE '${train_id}')`)
+                db.query(`update passengers set status_num = status_num-${wl_updated.status_num.length + new_diff-1} where ticket_status LIKE 'WL%' and  status_num > ${min_waitlist_value}  and status_num < ${max_waitlist_value} and tick_id in (select ticket_id from ticket where journey_date LIKE '${date}' AND class LIKE '${train_class}' AND train_id LIKE '${train_id}')`)
             }
+            
         }
 
         if(consider_new_updation=='three')
         {
-            if(second_max==2)
-            {
-                db.query(`update passengers set status_num = status_num-${wl_updated.status_num.length +1} where ticket_status LIKE 'WL%' and  status_num > ${min_waitlist_value}  and status_num < ${max_waitlist_value-1} and tick_id in (select ticket_id from ticket where journey_date LIKE '${date}' AND class LIKE '${train_class}' AND train_id LIKE '${train_id}')`)
-            }
-            else
-            {
+
+                if(second_max-min_waitlist_value==1)
+                {
+                db.query(`update passengers set status_num = status_num-${wl_updated.status_num.length +1} where ticket_status LIKE 'WL%' and  status_num=${second_max} and tick_id in (select ticket_id from ticket where journey_date LIKE '${date}' AND class LIKE '${train_class}' AND train_id LIKE '${train_id}')`)
+                }
+                else
+                {
                 db.query(`update passengers set status_num = status_num-${wl_updated.status_num.length +2} where ticket_status LIKE 'WL%' and  status_num > ${min_waitlist_value+1}  and status_num < ${max_waitlist_value} and tick_id in (select ticket_id from ticket where journey_date LIKE '${date}' AND class LIKE '${train_class}' AND train_id LIKE '${train_id}')`)
-            }
+                }
+                
         }
         return db.query(`select * from class`);
         
@@ -627,7 +658,7 @@ arr = {
     train_id : train_id ,
     dates :  dates ,
     passenger : passenger,
-    
+   
     train_name : train_name,
     price : 0,
     pnr : 0,
@@ -950,8 +981,7 @@ arr.new_dates = new_dates;
                             }
                             }
                             else
-                            {
-                            
+                           
                                     
                                         // WL + Confirmed
                                         // A negative value is thrown
@@ -994,7 +1024,10 @@ arr.new_dates = new_dates;
                                             
                                             
                                         }
-                                        
+                                        // while(cancelled_confirm_seats_array.length>0)
+                                        // {
+                                        //     cancelled_confirm_seats_array.pop();
+                                        // }
                             
                                     for(let i = mid_arr_length;i<(diff +mid_arr_length);i++)
                                     {
