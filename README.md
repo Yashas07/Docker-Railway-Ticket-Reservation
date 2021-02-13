@@ -2,7 +2,7 @@
 
 This project enables the users to book train tickets.
 
-#Requirements:
+Requirements:
 
 1.Docker
 
@@ -10,7 +10,7 @@ This project enables the users to book train tickets.
 
 Steps :
 
-Step 1 : Create a file with filname docker-compose.yml in any directory.
+Step 1 : Create a file with filename docker-compose.yml in any directory.
 
 Step 2: Copy the contents of the file https://github.com/Yashas07/Railway-Ticket-Reservation/blob/master/docker-compose.yml to the docker-compose.yml file which you have created.
 
