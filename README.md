@@ -1,5 +1,7 @@
 # Railway-Ticket-Reservation
 
+This project enables the users to book train tickets.
+
 Requirements:
 
 1.Docker
